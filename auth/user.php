@@ -7,7 +7,7 @@ if ($con->connect_error) {
 }
 
 // User ID or username (replace with the actual value)
-// $userId = $_POST['id'];
+$userId = $_POST['id'];
 
 // SQL query to fetch data for a single user with inner joins on the "section" and "establishment" tables
 $sql = "SELECT users.*, 
@@ -16,7 +16,7 @@ $sql = "SELECT users.*,
         FROM users
         LEFT JOIN section ON users.section = section.code
         LEFT JOIN establishment ON users.establishment = establishment.code
-        WHERE users.id = 31";
+        WHERE users.id = $userId";
 
 // Execute the query
 $result = $con->query($sql);
