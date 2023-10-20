@@ -15,7 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = mysqli_real_escape_string($con, $email);
 
     // Fetch user data based on the provided email
-    $sql = "SELECT * FROM users WHERE email = '$email'";
+    $sql = "SELECT * FROM users WHERE email = '$email'
+    UNION
+    SELECT * FROM admin WHERE email = '$email'";
     $result = $con->query($sql);
 
     if ($result->num_rows == 1) {

@@ -10,18 +10,18 @@ $id = $data['id'];
 $code = $data['leave'];
 $path = $data['path'];
 
-// Perform the update without checking if $code exists in the column
-$sqlUpdate = "UPDATE users SET $path = ? WHERE id = ?";
-$stmtUpdate = $con->prepare($sqlUpdate);
-$stmtUpdate->bind_param("si", $code, $id);
+// Perform the delete operation
+$sqlDelete = "DELETE FROM $path WHERE $code+id = ?";
+$stmtDelete = $con->prepare($sqlDelete);
+$stmtDelete->bind_param("i", $id);
 
-if ($stmtUpdate->execute()) {
-    // User updated successfully
-    $response = array('status' => 'Success', 'message' => "Done");
+if ($stmtDelete->execute()) {
+    // User deleted successfully
+    $response = array('status' => 'Success', 'message' => "$path leaved successfully");
     echo json_encode($response);
 } else {
-    // Error updating user
-    $response = array('status' => 'error', 'message' => "Error leaving ${path}");
+    // Error deleting user
+    $response = array('status' => 'error', 'message' => "Error leaving $path");
     echo json_encode($response);
 }
 

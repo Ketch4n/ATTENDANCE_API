@@ -12,16 +12,16 @@ $data = json_decode(file_get_contents('php://input'), true);
 $email = $data['email'];
 $password = $data['password'];
 $name = $data['name'];
-$id_location = $data['id_location'];
+$user_id = $data['user_id'];
 $role = $data['role'];
-$section = "0";
-$estab = "0";
 
 // Hash the password
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 // Check if the email is already taken
-$sqlCheckEmail = "SELECT * FROM users WHERE email = '$email'";
+$sqlCheckEmail = "SELECT email FROM users WHERE email = '$email'
+                UNION
+                SELECT email FROM admin WHERE email = '$email'";
 $result = $con->query($sqlCheckEmail);
 
 if ($result->num_rows > 0) {
@@ -29,18 +29,30 @@ if ($result->num_rows > 0) {
     $response["status"] = "error";
     $response["message"] = "Email is already taken";
 } else {
-    // Insert data into the users table with hashed password
-    $sqlUsers = "INSERT INTO users (email, password, name, id_location, role, section, establishment) VALUES ('$email', '$hashedPassword', '$name', '$id_location', '$role', '$section', '$estab')";
-
-    // Perform the insertion into the users table
-    if ($con->query($sqlUsers) === TRUE) {
-        // Data inserted successfully
-        $response["status"] = "Success";
-        $response["message"] = "Account Created Successfully";
+    if ($role === 'Admin') {
+        // Insert data into the admin table with hashed password
+        $sqlAdmin = "INSERT INTO admin (email, password, name, user_id, role) VALUES ('$email', '$hashedPassword', '$name', '$user_id', '$role')";
+        if ($con->query($sqlAdmin) === TRUE) {
+            // Data inserted successfully into admin table
+            $response["status"] = "Success";
+            $response["message"] = "Admin account created successfully";
+        } else {
+            // Error occurred while inserting data into admin table
+            $response["status"] = "Error";
+            $response["message"] = "Failed to insert data into admin table";
+        }
     } else {
-        // Error occurred while inserting data
-        $response["status"] = "Error";
-        $response["message"] = "Failed to insert data";
+        // Insert data into the users table with hashed password
+        $sqlUsers = "INSERT INTO users (email, password, name, user_id, role) VALUES ('$email', '$hashedPassword', '$name', '$user_id', '$role')";
+        if ($con->query($sqlUsers) === TRUE) {
+            // Data inserted successfully into users table
+            $response["status"] = "Success";
+            $response["message"] = "User account created successfully";
+        } else {
+            // Error occurred while inserting data into users table
+            $response["status"] = "Error";
+            $response["message"] = "Failed to insert data into users table";
+        }
     }
 }
 

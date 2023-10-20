@@ -1,22 +1,25 @@
 <?php
 include '../db/database.php';
-header('Content-Type: application/json');
+
 // Check the connection
 if ($con->connect_error) {
     die("Connection failed: " . $con->connect_error);
 }
 
 // User ID or username (replace with the actual value)
-$userId = $_POST['id'];
+// $userId = $_POST['id'];
 
-// SQL query to fetch data for a single user with inner joins on the "section" and "establishment" tables
+// SQL query to fetch data for a single user with left joins and filtering for null values
 $sql = "SELECT users.*, 
-               IFNULL(section.section_name, 'No section') AS section_name, 
-               IFNULL(establishment.establishment_name, 'No establishment') AS establishment_name
+        COALESCE(section.section_name, 'No Section') AS section_name, 
+        COALESCE(establishment.establishment_name, 'No Establishment') AS establishment_name 
+     
         FROM users
-        LEFT JOIN section ON users.section = section.code
-        LEFT JOIN establishment ON users.establishment = establishment.code
-        WHERE users.id = $userId";
+        LEFT JOIN class ON users.id = class.student_id
+        LEFT JOIN section ON class.section_id = section.id
+        LEFT JOIN room ON users.id = room.student_id
+        LEFT JOIN establishment ON room.establishment_id = establishment.id
+        WHERE users.id = 31";
 
 // Execute the query
 $result = $con->query($sql);
@@ -31,6 +34,7 @@ if ($result->num_rows > 0) {
 $con->close();
 
 // Return the JSON response
-
+header('Content-Type: application/json');
 echo json_encode($response);
+
 ?>
