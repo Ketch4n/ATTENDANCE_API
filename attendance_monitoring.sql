@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 20, 2023 at 09:22 AM
+-- Generation Time: Oct 26, 2023 at 02:56 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,7 +41,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `email`, `password`, `name`, `user_id`, `role`) VALUES
-(1, 'admin@gmail.com', '$2y$10$kyYhnWcWwcBZoyakAS0BleUENV7vAvDzxKKEkKx8oUp./sr6Yf5XW', 'Administrator', '850364824', 'Admin');
+(1, 'admin@gmail.com', '$2y$10$kyYhnWcWwcBZoyakAS0BleUENV7vAvDzxKKEkKx8oUp./sr6Yf5XW', 'Administrator', '850364824', 'Admin'),
+(2, 'this@gmail.com', '$2y$10$Q5sMYsU4XTSQkpLc3ovdKOhRI03cQbCg2SXAmnD9o.LkCtdgIatVi', 'This is it', '37360849', 'Admin');
 
 -- --------------------------------------------------------
 
@@ -60,7 +61,9 @@ CREATE TABLE `class` (
 --
 
 INSERT INTO `class` (`id`, `section_id`, `student_id`) VALUES
-(1, 1, 31);
+(1, 1, 31),
+(2, 3, 31),
+(3, 4, 31);
 
 -- --------------------------------------------------------
 
@@ -143,8 +146,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `email`, `password`, `name`, `user_id`, `role`) VALUES
 (31, 'mangao.christian.04@gmail.com', '$2y$10$fAdeTdZpj3Ah.DWbmJtUcOWMH2HcGxYpKLr.rmgVVyX/0kzJ9iRJO', 'Ketchan', '333758789', 'Student'),
-(36, 'test@gmail.com', '$2y$10$BueUE/R2v7Q3/KP2bwbsz.izh2g7yamj8W.1chmq9tvBRk.8cialG', 'Testing', '184943020', 'Student'),
-(37, 'estab@gmail.com', '$2y$10$IIjy2tbNIxpUWhvbMdrT/emjjXk/1Rix8j405KWC9sOTBCvmmxtki', 'NIXEN', '783203162', 'Establishment');
+(35, 'estab@gmail.com', '$2y$10$cmEM0MGBbhBvXhTZQ4YIHefBdBQR/q9u7CeeLLKNXhVsmP8uQlfx2', 'Nixen', '588183759', 'Establishment');
 
 --
 -- Indexes for dumped tables
@@ -194,13 +196,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `establishment`
@@ -224,7 +226,7 @@ ALTER TABLE `section`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
