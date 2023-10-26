@@ -8,10 +8,10 @@ $data = json_decode(file_get_contents('php://input'), true);
 // Retrieve the values from the request body
 $id = $data['id'];
 $path = $data['path'];
-$ref = $data['ref'];
+// $ref = $data['ref'];
 
 // Perform the delete operation
-$sqlDelete = "DELETE FROM $path WHERE $code+_id = ?";
+$sqlDelete = "DELETE FROM $path WHERE student_id = ?";
 $stmtDelete = $con->prepare($sqlDelete);
 $stmtDelete->bind_param("i", $id);
 
