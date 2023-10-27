@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2023 at 09:50 AM
+-- Generation Time: Oct 26, 2023 at 10:33 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -36,6 +36,14 @@ CREATE TABLE `admin` (
   `role` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `email`, `password`, `name`, `user_id`, `role`) VALUES
+(1, 'admin@gmail.com', '$2y$10$kyYhnWcWwcBZoyakAS0BleUENV7vAvDzxKKEkKx8oUp./sr6Yf5XW', 'Administrator', '850364824', 'Admin'),
+(2, 'this@gmail.com', '$2y$10$Q5sMYsU4XTSQkpLc3ovdKOhRI03cQbCg2SXAmnD9o.LkCtdgIatVi', 'This is it', '37360849', 'Admin');
+
 -- --------------------------------------------------------
 
 --
@@ -47,14 +55,6 @@ CREATE TABLE `class` (
   `section_id` int(255) NOT NULL,
   `student_id` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `class`
---
-
-INSERT INTO `class` (`id`, `section_id`, `student_id`) VALUES
-(7, 1, 31),
-(8, 1, 36);
 
 -- --------------------------------------------------------
 
@@ -130,10 +130,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `name`, `user_id`, `role`) VALUES
-(1, 'admin@gmail.com', '$2y$10$xLLjyCBv0cZpUykEKVIpOOo3F204McEHU8uXAdgTnSWFTdel5rT12', 'Admin', '832446736', 'Admin'),
 (31, 'mangao.christian.04@gmail.com', '$2y$10$fAdeTdZpj3Ah.DWbmJtUcOWMH2HcGxYpKLr.rmgVVyX/0kzJ9iRJO', 'Ketchan', '333758789', 'Student'),
-(35, 'estab@gmail.com', '$2y$10$cmEM0MGBbhBvXhTZQ4YIHefBdBQR/q9u7CeeLLKNXhVsmP8uQlfx2', 'Nixen', '588183759', 'Establishment'),
-(36, 'lovegellay@gmail.com', '$2y$10$OlnO.1Ng2.jDXs3SezPQrus02y6lYZUjRTUGbGCUNSfNkqsCAzgfC', 'Gellay', '621566478', 'Student');
+(35, 'estab@gmail.com', '$2y$10$cmEM0MGBbhBvXhTZQ4YIHefBdBQR/q9u7CeeLLKNXhVsmP8uQlfx2', 'Nixen', '588183759', 'Establishment');
 
 --
 -- Indexes for dumped tables
@@ -189,7 +187,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `establishment`
@@ -201,7 +199,7 @@ ALTER TABLE `establishment`
 -- AUTO_INCREMENT for table `room`
 --
 ALTER TABLE `room`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `section`
@@ -213,7 +211,7 @@ ALTER TABLE `section`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

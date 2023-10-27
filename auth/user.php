@@ -7,7 +7,7 @@ if ($con->connect_error) {
 }
 
 // User ID or username (replace with the actual value)
-// $userId = $_POST['id'];
+$userId = $_POST['id'];
 
 // SQL query to fetch data for a single user with left joins and filtering for null values
 $sql = "SELECT users.*, 
@@ -24,7 +24,7 @@ $sql = "SELECT users.*,
         LEFT JOIN section ON class.section_id = section.id
         LEFT JOIN room ON users.id = room.student_id
         LEFT JOIN establishment ON room.establishment_id = establishment.id
-        WHERE users.id = 31";
+        WHERE users.id = $userId";
 
 // Execute the query
 $result = $con->query($sql);

@@ -29,19 +29,19 @@ if ($result->num_rows > 0) {
     $response["status"] = "error";
     $response["message"] = "Email is already taken";
 } else {
-    if ($role === 'Admin') {
-        // Insert data into the admin table with hashed password
-        $sqlAdmin = "INSERT INTO admin (email, password, name, user_id, role) VALUES ('$email', '$hashedPassword', '$name', '$user_id', '$role')";
-        if ($con->query($sqlAdmin) === TRUE) {
-            // Data inserted successfully into admin table
-            $response["status"] = "Success";
-            $response["message"] = "Admin account created successfully";
-        } else {
-            // Error occurred while inserting data into admin table
-            $response["status"] = "Error";
-            $response["message"] = "Failed to insert data into admin table";
-        }
-    } else {
+    // if ($role === 'Admin') {
+    //     // Insert data into the admin table with hashed password
+    //     $sqlAdmin = "INSERT INTO admin (email, password, name, user_id, role) VALUES ('$email', '$hashedPassword', '$name', '$user_id', '$role')";
+    //     if ($con->query($sqlAdmin) === TRUE) {
+    //         // Data inserted successfully into admin table
+    //         $response["status"] = "Success";
+    //         $response["message"] = "Admin account created successfully";
+    //     } else {
+    //         // Error occurred while inserting data into admin table
+    //         $response["status"] = "Error";
+    //         $response["message"] = "Failed to insert data into admin table";
+    //     }
+    // } else {
         // Insert data into the users table with hashed password
         $sqlUsers = "INSERT INTO users (email, password, name, user_id, role) VALUES ('$email', '$hashedPassword', '$name', '$user_id', '$role')";
         if ($con->query($sqlUsers) === TRUE) {
@@ -53,7 +53,7 @@ if ($result->num_rows > 0) {
             $response["status"] = "Error";
             $response["message"] = "Failed to insert data into users table";
         }
-    }
+    // }
 }
 
 // Close database connection
