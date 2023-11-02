@@ -7,14 +7,14 @@ if ($con->connect_error) {
 }
 
 // User ID or username (replace with the actual value)
-$secId = $_POST['section_id'];
+$estabId = $_POST['establishment_id'];
 
 // SQL query to fetch data for a single user with left joins and filtering for null values
-$sql = "SELECT class.*, section.*, users.*
-        FROM class
-        INNER JOIN section ON class.section_id = section.id
-        LEFT JOIN users ON class.student_id = users.id
-        WHERE class.section_id = $secId";
+$sql = "SELECT room.*, establishment.*, users.*
+        FROM room
+        INNER JOIN establishment ON room.establishment_id = establishment.id
+        LEFT JOIN users ON room.student_id = users.id
+        WHERE room.establishment_id = $estabId";
 
 
 
