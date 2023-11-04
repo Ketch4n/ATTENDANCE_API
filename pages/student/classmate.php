@@ -7,7 +7,7 @@ if ($con->connect_error) {
 }
 
 // User ID or username (replace with the actual value)
-$secId = $_POST['section_id'];
+$secId = 1;
 
 // SQL query to fetch data for a single user with left joins and filtering for null values
 $sql = "SELECT class.*, section.*, users.*
@@ -37,6 +37,3 @@ $con->close();
 // Return the JSON response without brackets
 header('Content-Type: application/json');
 echo json_encode($response);
-
-
-?>

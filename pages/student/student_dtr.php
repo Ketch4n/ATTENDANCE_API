@@ -7,35 +7,22 @@ if ($con->connect_error) {
 
 // User ID or username (replace with the actual value)
 $uid = $_POST['id'];
-
+$month = "2023-11-04";
 // SQL query to fetch data for a single user
-$sql = "SELECT * FROM dtr WHERE student_id = $uid";
+$sql = "SELECT * FROM dtr WHERE student_id = $uid AND MONTH(date) = MONTH('$month')";
 
 // Execute the query
 $result = $con->query($sql);
 
-// Convert the result set to JSON
+// Initialize an empty array to store the results
 $response = array();
 
 if ($result->num_rows > 0) {
-    // Fetch the row
-    $response = $result->fetch_assoc();
-
-    // Create an array representing a single row
-    // $response = array(
-    //     'id' => $row['id'],
-    //     'student_id' => $row['student_id'],
-    //     'estab_id' => $row['estab_id'],
-    //     'time_in_am' => $row['time_in_am'],
-    //     'time_out_am' => $row['time_out_am'],
-    //     'time_in_pm' => $row['time_in_pm'],
-    //     'time_out_pm' => $row['time_out_pm'],
-    //     'date' => $row['date']
-    // );
+    // Loop through the result set and fetch all rows
+    while ($row = $result->fetch_assoc()) {
+        $response[] = $row;
+    }
 }
-
-// Close the connectionx
-$con->close();
 
 // Return the JSON response
 header('Content-Type: application/json');
