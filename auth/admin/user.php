@@ -1,5 +1,5 @@
 <?php
-include '../db/database.php';
+include '../../db/database.php';
 
 // Check the connection
 if ($con->connect_error) {
@@ -10,7 +10,7 @@ if ($con->connect_error) {
 $userId = $_POST['id'];
 
 // SQL query to fetch data for a single user with left joins and filtering for null values
-$sql = "SELECT users.*, 
+$sql = "SELECT admin.*, 
         COALESCE(section.id, 'null') AS section_id,
         COALESCE(section.section_name, 'null') AS section_name, 
         COALESCE(section.admin_id, 'null') AS admin_id,
@@ -19,12 +19,12 @@ $sql = "SELECT users.*,
         COALESCE(establishment.location, 'null') AS location,
         COALESCE(establishment.creator_id, 'null') AS creator_id
      
-        FROM users
-        LEFT JOIN class ON users.id = class.student_id
+        FROM admin
+        LEFT JOIN class ON admin.id = class.student_id
         LEFT JOIN section ON class.section_id = section.id
-        LEFT JOIN room ON users.id = room.student_id
+        LEFT JOIN room ON admin.id = room.student_id
         LEFT JOIN establishment ON room.establishment_id = establishment.id
-        WHERE users.id = $userId";
+        WHERE admin.id = $userId";
 
 // Execute the query
 $result = $con->query($sql);

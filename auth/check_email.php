@@ -6,10 +6,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
 
     // Replace 'users' and 'email_column' with your actual table and column names
-    // $sqlCheckEmail = "SELECT email FROM users WHERE email = '$email'
-    //             UNION
-    //             SELECT email FROM admin WHERE email = '$email'";
-        $sqlCheckEmail = "SELECT email FROM users WHERE email = '$email'";
+    $sqlCheckEmail = "SELECT email FROM users WHERE email = '$email'
+                UNION
+                SELECT email FROM admin WHERE email = '$email'";
+     
     $result = $con->query($sqlCheckEmail);
 
     if ($result->num_rows > 0) {
@@ -27,4 +27,3 @@ $con->close();
 // Return response to Flutter app
 header('Content-Type: application/json');
 echo json_encode($response);
-?>

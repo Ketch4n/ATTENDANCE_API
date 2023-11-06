@@ -7,12 +7,16 @@ if ($con->connect_error) {
 }
 
 // User ID or username (replace with the actual value)
-$secId = 1;
+$secId = 7;
 
 // SQL query to fetch data for a single user with left joins and filtering for null values
-$sql = "SELECT class.*, section.*, users.*
+$sql = "SELECT class.*, section.*, users.*,
+  COALESCE(admin.name,admin.name) AS admin_name,
+  COALESCE(admin.email,admin.email) AS admin_email
+
         FROM class
         INNER JOIN section ON class.section_id = section.id
+        INNER JOIN admin ON admin.id = section.admin_id
         LEFT JOIN users ON class.student_id = users.id
         WHERE class.section_id = $secId";
 

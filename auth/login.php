@@ -29,7 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Construct a success response with user ID
             $response = [
                 'success' => true,
-                'id' => $row['id'], // Include other user-related data if needed
+                'id' => $row['id'], 
+                'role' => $row['role'],
                 'message' => $row['name'],
             ];
             echo json_encode($response);
@@ -59,4 +60,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $con->close();
-?>

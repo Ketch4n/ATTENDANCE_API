@@ -1,5 +1,6 @@
 <?php
 include '../../db/database.php';
+
 // Check the connection
 if ($con->connect_error) {
     die("Connection failed: " . $con->connect_error);
@@ -7,9 +8,9 @@ if ($con->connect_error) {
 
 // User ID or username (replace with the actual value)
 $uid = $_POST['id'];
-$month = "2023-11-04";
+$month = $_POST['month'];
 // SQL query to fetch data for a single user
-$sql = "SELECT * FROM dtr WHERE student_id = $uid AND MONTH(date) = MONTH('$month')";
+$sql = "SELECT * FROM dtr WHERE student_id = $uid AND DATE_FORMAT(date, '%Y-%m') = '$month' ORDER BY date DESC";
 
 // Execute the query
 $result = $con->query($sql);
