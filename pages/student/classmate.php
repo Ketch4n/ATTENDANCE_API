@@ -7,7 +7,7 @@ if ($con->connect_error) {
 }
 
 // User ID or username (replace with the actual value)
-$secId = 7;
+$secId = $_POST['section_id'];
 
 // SQL query to fetch data for a single user with left joins and filtering for null values
 $sql = "SELECT class.*, section.*, users.*,

@@ -7,7 +7,7 @@ if ($con->connect_error) {
 }
 
 // User ID or username (replace with the actual value)
-$userId = $_POST['id'];
+$userId = 41;
 
 // SQL query to fetch data from the 'establishment' table for a single user
 $sql = "SELECT admin.*, 
@@ -15,10 +15,11 @@ $sql = "SELECT admin.*,
         COALESCE(establishment.code, 'null') AS code,
         COALESCE(establishment.establishment_name, 'null') AS establishment_name,
         COALESCE(establishment.creator_id, 'null') AS creator_id,
-        COALESCE(establishment.location, 'null') AS location
+        COALESCE(establishment.location, 'null') AS location,
+        COALESCE(establishment.status, 'null') AS status
        
         FROM establishment
-        LEFT JOIN admin ON establishment.creator_id = admin.id
+        LEFT JOIN admin ON establishment.creator_id = admin.id AND establishment.status = 'Active'
         WHERE admin.id = $userId";
 
 

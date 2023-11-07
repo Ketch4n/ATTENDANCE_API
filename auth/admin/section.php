@@ -14,10 +14,12 @@ $sql = "SELECT admin.*,
         COALESCE(section.id, 'null') AS id,
         COALESCE(section.code, 'null') AS code,
         COALESCE(section.section_name, 'null') AS section_name,
-        COALESCE(section.admin_id, 'null') AS admin_id
+        COALESCE(section.admin_id, 'null') AS admin_id,
+        COALESCE(section.status, 'null') AS status
+
        
         FROM section
-        LEFT JOIN admin ON section.admin_id = admin.id
+        LEFT JOIN admin ON section.admin_id = admin.id AND section.status = 'Active'
         WHERE admin.id = $userId";
 
 
